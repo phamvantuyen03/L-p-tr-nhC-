@@ -1,0 +1,161 @@
+using B1;
+using System;
+using System.Runtime.CompilerServices;
+using System.Text;
+
+namespace B1
+{
+    internal class SO
+    {
+        public double so;
+        public SO() { }
+        public SO(double so)
+        {
+            this.so = so;
+        }
+
+        //hàm nhập
+        public void Nhap()
+        {
+            Console.Write("Nhập số: ");
+            this.so = Convert.ToInt32(Console.ReadLine());
+        }
+
+        //hàm xuất
+        public void Xuat()
+        {
+            Console.WriteLine(this.so);
+        }
+
+        //hàm KT số chẵn lẻ
+        public void KTChanLe()
+        {
+            if(this.so % 2 == 0)
+            {
+                Console.WriteLine(this.so + " là số chẵn");
+            }
+            else
+            {
+                Console.WriteLine(this.so + " là số lẻ");
+            }
+        }
+
+        //hàm KT số nguyên tố 
+        public void KTSNT()
+        {
+            bool IsPrime = true; // khái báo kiểu dữ liệu boolean gán giá trị = true
+            if (this.so < 2)
+            {
+                IsPrime = false; // nếu a<2 thì biến IsPrime sai
+            }
+
+            for(int i=2; i<=Math.Sqrt(this.so); i++)
+            {
+                if(this.so % i == 0) // nếu số nhập chia số dư cho số i chạy trong vòng lặp = 0 thì IsPrime sai
+                {
+                    IsPrime= false;
+                    break; // thoát khỏi ĐK tiếp tục vòng lặp
+                }
+            }
+
+            if(IsPrime) //nếu IsPrime đúng với ĐK thì là số nguyên tố
+            {
+                Console.WriteLine(this.so + " là số nguyên tố");
+            }
+            else
+            {
+                Console.WriteLine(this.so + " không phải là số nguyên tố");
+            }
+        }
+
+        //hàm KT số hoàn hảo
+        public void KTSoHoanHao()
+        {
+            int sum = 0;
+            for(int i = 1; i < this.so - 1; i++)
+            {
+                if (this.so % i == 0)
+                {
+                    sum += i;
+                }
+            }
+
+            if (sum == this.so)
+            {
+                Console.WriteLine(this.so + " là số hoàn hảo");
+            }
+            else
+            {
+                Console.WriteLine(this.so +" không phải là số hoàn hảo");
+            }
+        }
+
+        //nạp chồng phương thức
+        public SO cong(SO b)
+        {
+            SO c = new SO();
+            c.so = this.so + b.so;
+            return c;
+        }
+
+        public SO tru(SO b)
+        {
+            SO c = new SO();
+            c.so = this.so - b.so;
+            return c;
+        }
+
+        public SO nhan(SO b)
+        {
+            SO c = new SO();
+            c.so = this.so * b.so;
+            return c;
+        }
+
+        public SO chia(SO b)
+        {
+            SO c = new SO();
+            c.so = this.so / b.so;
+            return c;
+        }
+    }
+}
+namespace kiemtrab1
+{
+    internal class program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            SO a = new SO();
+            SO b = new SO();
+            SO c = new SO();
+
+            a.Nhap();
+            a.KTChanLe();
+            a.KTSNT();
+            a.KTSoHoanHao();
+
+            b.Nhap();
+            b.KTChanLe();
+            b.KTSNT();
+            b.KTSoHoanHao();
+
+            c = a.cong(b);
+            Console.Write("Tổng: ");
+            c.Xuat();
+            c = a.tru(b);
+            Console.Write("Hiệu: ");
+            c.Xuat();
+            c = a.nhan(b);
+            Console.Write("Tích: ");
+            c.Xuat();
+            c = a.chia(b);
+            Console.Write("Thương: ");
+            c.Xuat();
+
+            Console.ReadLine();
+            
+        }
+    }
+}
